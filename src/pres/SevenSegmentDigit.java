@@ -7,7 +7,7 @@ public class SevenSegmentDigit extends JPanel {
     int value;
     public SevenSegmentDigit(){
         this.setPreferredSize(new Dimension(42,60));
-        value = 7;
+        value = 0;
         setBackground(Color.BLACK);
     }
     void setValue(int value){
