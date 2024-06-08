@@ -1,6 +1,7 @@
 package pres;
 
 import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
@@ -15,19 +16,46 @@ public class MainPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Road Table
-        roadTable = new JTable(7, 5);
+        roadTable = new JTable(5, 5);
         roadTable.setEnabled(false);
-        roadTable.setRowHeight(50); // Ustaw wysokość wiersza
+        roadTable.setRowHeight(73);
+        roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (column == 0) {
+                    JLabel label = new JLabel();
+                    label.setOpaque(true);
+                    label.setBackground(Color.BLACK);
+                    return label;
+                } else if (column == 4) {
+                    JLabel label = new JLabel();
+                    label.setOpaque(true);
+                    label.setBackground(Color.BLACK);
+                    return label;
+                } else if (column == 2 && row == 3) {
+                    JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                    car.setBackground(Color.orange);
+                    JLabel label = new JLabel();
+                    car.add(label);
 
-        // Road Panel
+                    JPanel container = new JPanel(new BorderLayout());
+                    container.setBorder(BorderFactory.createEmptyBorder(13, 13, 13, 13));
+                    container.setBackground(table.getBackground());
+                    container.add(car, BorderLayout.CENTER);
+
+                    return container;
+                } else {
+                    return new JLabel();
+                }
+            }
+        });
+
         roadPanel = new RoadPanel();
-        roadPanel.setLayout(null); // Używamy null layout, aby ręcznie zarządzać pozycją komponentów
+        roadPanel.setLayout(null);
 
-        // Dodajemy roadTable do roadPanel
         roadPanel.add(roadTable);
         this.add(roadPanel, BorderLayout.CENTER);
 
-        // Score Panel
         scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         unity = new SevenSegmentDigit();
         tens = new SevenSegmentDigit();
@@ -50,20 +78,17 @@ public class MainPanel extends JPanel {
             super.paintComponent(g);
             int panelWidth = getWidth();
             int panelHeight = getHeight();
-            int roadWidth = panelWidth - 240;
+            int roadWidth = panelWidth - 340;
             int roadHeight = panelHeight;
 
-            // Green roadside
             g.setColor(Color.GREEN);
             g.fillRect(0, 0, panelWidth, panelHeight);
 
-            // Red lines
             g.setColor(Color.RED);
-            g.fillRect(100, 0, 20, panelHeight);
-            g.fillRect(panelWidth - 120, 0, 20, panelHeight);
+            g.fillRect(150, 0, 20, panelHeight);
+            g.fillRect(panelWidth - 170, 0, 20, panelHeight);
 
-            // Adjust JTable position and size
-            roadTable.setBounds(120, 0, roadWidth, roadHeight);
+            roadTable.setBounds(170, 0, roadWidth, roadHeight);
         }
     }
 }
