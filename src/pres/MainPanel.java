@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     public JTable roadTable;
+    public int carPosition = 2;
     RoadPanel roadPanel;
     JPanel scorePanel;
     public SevenSegmentDigit unity;
@@ -21,7 +22,7 @@ public class MainPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Road Table
-        roadTable = new JTable(5, 5);
+        roadTable = new JTable(4, 5);
         roadTable.setEnabled(false);
         roadTable.setRowHeight(73);
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
@@ -37,7 +38,7 @@ public class MainPanel extends JPanel {
                     label.setOpaque(true);
                     label.setBackground(Color.BLACK);
                     return label;
-                } else if (column == 2 && row == 3) {
+                } else if (column == carPosition && row == 3) {
                     JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
                     car.setBackground(Color.orange);
                     JLabel label = new JLabel();
@@ -73,6 +74,9 @@ public class MainPanel extends JPanel {
         unity.setValue(score % 10);
         tens.setValue((score / 10) % 10);
         hundreds.setValue((score / 100) % 10);
+    }
+    public void updateView(){
+        roadTable.repaint();
     }
 
     class RoadPanel extends JPanel {

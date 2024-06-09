@@ -39,9 +39,15 @@ public class Board implements KeyListener {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyChar()=='a'){
-                            System.out.println("A dziala");
+                            if(mainPanel.carPosition != 1){
+                                mainPanel.carPosition--;
+                                mainPanel.updateView();
+                            }
                         }else if(e.getKeyChar()=='d'){
-                            System.out.println("D dziala");
+                            if(mainPanel.carPosition != 3){
+                                mainPanel.carPosition++;
+                                mainPanel.updateView();
+                            }
                         }
                     }
                 };
