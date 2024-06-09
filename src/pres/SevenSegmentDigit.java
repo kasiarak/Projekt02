@@ -100,11 +100,7 @@ public class SevenSegmentDigit extends JPanel implements DigitListener{
     public void addDigitListener(DigitListener listener) {
         listeners.add(listener);
     }
-
-    public void removeDigitListener(DigitListener listener) {
-        listeners.remove(listener);
-    }
-
+    
     void notifyListeners(EventObject event) {
         for (DigitListener listener : listeners) {
             listener.handleDigitEvent(event);
