@@ -64,16 +64,12 @@ public class MainPanel extends JPanel {
         unity = new SevenSegmentDigit();
         tens = new SevenSegmentDigit();
         hundreds = new SevenSegmentDigit();
+        unity.addDigitListener(tens);
+        tens.addDigitListener(hundreds);
         scorePanel.add(hundreds);
         scorePanel.add(tens);
         scorePanel.add(unity);
         this.add(scorePanel, BorderLayout.NORTH);
-    }
-
-    void updateScore(int score) {
-        unity.setValue(score % 10);
-        tens.setValue((score / 10) % 10);
-        hundreds.setValue((score / 100) % 10);
     }
     public void updateView(){
         roadTable.repaint();

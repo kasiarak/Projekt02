@@ -28,8 +28,7 @@ public class Board implements KeyListener {
             if(!scoreIsShowing){
                 scoreIsShowing = true;
                 mainPanel.unity.handleEvent(new StartEvent(mainPanel.unity));
-                mainPanel.tens.handleEvent(new StartEvent(mainPanel.tens));
-                mainPanel.hundreds.handleEvent(new StartEvent(mainPanel.hundreds));
+
                 tickGenerator = new TickGenerator();
                 tickGenerator.start();
             }

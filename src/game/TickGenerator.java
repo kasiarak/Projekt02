@@ -10,7 +10,6 @@ public class TickGenerator extends Thread{
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 while(isWorking){
-                    System.out.println("INTERVAL: " + interval);
                     TickEvent tickEvent = new TickEvent(this);
                     Thread.sleep(interval);
                     count++;

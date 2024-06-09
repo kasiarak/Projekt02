@@ -2,20 +2,17 @@ package pres;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.List;
 
-public class SevenSegmentDigit extends JPanel {
+public class SevenSegmentDigit extends JPanel implements DigitListener{
     int value;
+    List<DigitListener> listeners = new ArrayList<>();
     public SevenSegmentDigit(){
         this.value = -1;
         this.setPreferredSize(new Dimension(42,60));
         this.setBackground(Color.BLACK);
-    }
-    void setValue(int value){
-        if(value >= 0 && value <= 9){
-            this.value = value;
-            repaint();
-        }
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -86,11 +83,37 @@ public class SevenSegmentDigit extends JPanel {
         if (event instanceof StartEvent) {
             this.value = 0;
             repaint();
+            notifyListeners(event);
         } else if (event instanceof PlusOneEvent) {
+            this.value++;
+            if (this.value > 9) {
+                this.value = 0;
+                notifyListeners(new PlusOneEvent(this));
+            }
             repaint();
         } else if (event instanceof ResetEvent) {
+            this.value = -1;
             repaint();
+            notifyListeners(event);
         }
+    }
+    public void addDigitListener(DigitListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeDigitListener(DigitListener listener) {
+        listeners.remove(listener);
+    }
+
+    void notifyListeners(EventObject event) {
+        for (DigitListener listener : listeners) {
+            listener.handleDigitEvent(event);
+        }
+    }
+
+    @Override
+    public void handleDigitEvent(EventObject event) {
+        handleEvent(event);
     }
 }
 
