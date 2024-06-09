@@ -1,3 +1,4 @@
+import pres.MainPanel;
 import pres.MyFrame;
 
 import javax.swing.*;

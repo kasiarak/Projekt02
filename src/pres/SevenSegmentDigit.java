@@ -2,13 +2,14 @@ package pres;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.EventObject;
 
 public class SevenSegmentDigit extends JPanel {
     int value;
     public SevenSegmentDigit(){
+        this.value = -1;
         this.setPreferredSize(new Dimension(42,60));
-        value = 0;
-        setBackground(Color.BLACK);
+        this.setBackground(Color.BLACK);
     }
     void setValue(int value){
         if(value >= 0 && value <= 9){
@@ -81,4 +82,15 @@ public class SevenSegmentDigit extends JPanel {
             g.fillRect(12,55,20,3);
         }
     }
+    public void handleEvent(EventObject event) {
+        if (event instanceof StartEvent) {
+            this.value = 0;
+            repaint();
+        } else if (event instanceof PlusOneEvent) {
+            repaint();
+        } else if (event instanceof ResetEvent) {
+            repaint();
+        }
+    }
 }
+

@@ -1,18 +1,23 @@
 package pres;
 
+import game.Board;
+
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
-    JTable roadTable;
+    public JTable roadTable;
     RoadPanel roadPanel;
     JPanel scorePanel;
-    SevenSegmentDigit unity;
-    SevenSegmentDigit tens;
-    SevenSegmentDigit hundreds;
+    public SevenSegmentDigit unity;
+    public SevenSegmentDigit tens;
+    public SevenSegmentDigit hundreds;
 
     public MainPanel() {
+        Board board = new Board(this);
+        this.addKeyListener(board);
+        this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
         // Road Table
@@ -37,12 +42,10 @@ public class MainPanel extends JPanel {
                     car.setBackground(Color.orange);
                     JLabel label = new JLabel();
                     car.add(label);
-
                     JPanel container = new JPanel(new BorderLayout());
                     container.setBorder(BorderFactory.createEmptyBorder(13, 13, 13, 13));
                     container.setBackground(table.getBackground());
                     container.add(car, BorderLayout.CENTER);
-
                     return container;
                 } else {
                     return new JLabel();
