@@ -22,9 +22,9 @@ public class MainPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Road Table
-        roadTable = new JTable(4, 5);
+        roadTable = new JTable(7, 5);
         roadTable.setEnabled(false);
-        roadTable.setRowHeight(73);
+        roadTable.setRowHeight(42);
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -38,13 +38,13 @@ public class MainPanel extends JPanel {
                     label.setOpaque(true);
                     label.setBackground(Color.BLACK);
                     return label;
-                } else if (column == carPosition && row == 3) {
+                } else if (column == carPosition && row == 6) {
                     JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
                     car.setBackground(Color.orange);
                     JLabel label = new JLabel();
                     car.add(label);
                     JPanel container = new JPanel(new BorderLayout());
-                    container.setBorder(BorderFactory.createEmptyBorder(13, 13, 13, 13));
+                    container.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 13));
                     container.setBackground(table.getBackground());
                     container.add(car, BorderLayout.CENTER);
                     return container;
