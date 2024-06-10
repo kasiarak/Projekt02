@@ -38,13 +38,21 @@ public class Board implements KeyListener {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyChar()=='a'){
-                            if(mainPanel.carPosition != 1){
+                            if(mainPanel.carPosition != 0){
                                 mainPanel.carPosition--;
+                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
+                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
+                                    else mainPanel.gameBoard[0][i] = 1;
+                                }
                                 mainPanel.updateView();
                             }
                         }else if(e.getKeyChar()=='d'){
-                            if(mainPanel.carPosition != 3){
+                            if(mainPanel.carPosition != 2){
                                 mainPanel.carPosition++;
+                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
+                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
+                                    else mainPanel.gameBoard[0][i] = 1;
+                                }
                                 mainPanel.updateView();
                             }
                         }

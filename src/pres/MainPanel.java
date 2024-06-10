@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     public JTable roadTable;
-    public int carPosition = 2;
+    public int carPosition;
+    public int[][] gameBoard;
     RoadPanel roadPanel;
     JPanel scorePanel;
     public SevenSegmentDigit unity;
@@ -16,18 +17,22 @@ public class MainPanel extends JPanel {
     public SevenSegmentDigit hundreds;
 
     public MainPanel() {
+        gameBoard = new int[7][3];
+        gameBoard[0][1] = 1;
         Board board = new Board(this);
         this.addKeyListener(board);
         this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
-        // Road Table
         roadTable = new JTable(7, 5);
         roadTable.setEnabled(false);
         roadTable.setRowHeight(42);
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                for(int i = 0; i < gameBoard[0].length; i++){
+                    if(gameBoard[0][i]==1) carPosition = i;
+                }
                 if (column == 0) {
                     JLabel label = new JLabel();
                     label.setOpaque(true);
@@ -38,7 +43,7 @@ public class MainPanel extends JPanel {
                     label.setOpaque(true);
                     label.setBackground(Color.BLACK);
                     return label;
-                } else if (column == carPosition && row == 6) {
+                } else if (column == carPosition+1 && row == 6) {
                     JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
                     car.setBackground(Color.orange);
                     JLabel label = new JLabel();
@@ -48,7 +53,16 @@ public class MainPanel extends JPanel {
                     container.setBackground(table.getBackground());
                     container.add(car, BorderLayout.CENTER);
                     return container;
-                } else {
+                } else if(gameBoard[6-row][column-1] == 1){
+                    JPanel container = new JPanel(new BorderLayout());
+                    JLabel label = new JLabel();
+                    label.setOpaque(true);
+                    label.setBackground(Color.BLACK);
+                    container.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
+                    container.setBackground(table.getBackground());
+                    container.add(label, BorderLayout.CENTER);
+                    return container;
+                }else {
                     return new JLabel();
                 }
             }
