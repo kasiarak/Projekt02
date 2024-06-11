@@ -7,7 +7,7 @@ import java.util.EventObject;
 import java.util.List;
 
 public class SevenSegmentDigit extends JPanel implements DigitListener{
-    int value;
+    public int value;
     List<DigitListener> listeners = new ArrayList<>();
     public SevenSegmentDigit(){
         this.value = -1;
@@ -100,7 +100,7 @@ public class SevenSegmentDigit extends JPanel implements DigitListener{
     public void addDigitListener(DigitListener listener) {
         listeners.add(listener);
     }
-    
+
     void notifyListeners(EventObject event) {
         for (DigitListener listener : listeners) {
             listener.handleDigitEvent(event);

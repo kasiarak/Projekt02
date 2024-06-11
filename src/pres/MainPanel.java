@@ -53,7 +53,8 @@ public class MainPanel extends JPanel {
                     container.setBackground(table.getBackground());
                     container.add(car, BorderLayout.CENTER);
                     return container;
-                } else if(gameBoard[6-row][column-1] == 1){
+                }
+                else if(gameBoard[6-row][column-1] == 1){
                     JPanel container = new JPanel(new BorderLayout());
                     JLabel label = new JLabel();
                     label.setOpaque(true);
