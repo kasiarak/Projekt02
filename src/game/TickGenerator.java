@@ -26,7 +26,7 @@ public class TickGenerator extends Thread{
                     notifyTickEvent();
                     Thread.sleep(interval);
                     count++;
-                    if(count%5 == 0 && interval != 100){
+                    if(count%5 == 0 && interval != 200){
                         interval-=50;
                     }
                 }
