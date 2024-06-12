@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     public JTable roadTable;
-    public int carPosition;
+    public int carPosition = 1;
     public int[][] gameBoard;
     RoadPanel roadPanel;
     JPanel scorePanel;
@@ -30,9 +30,6 @@ public class MainPanel extends JPanel {
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                for(int i = 0; i < gameBoard[0].length; i++){
-                    if(gameBoard[0][i]==1) carPosition = i;
-                }
                 if (column == 0) {
                     JLabel label = new JLabel();
                     label.setOpaque(true);
