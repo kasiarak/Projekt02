@@ -24,53 +24,54 @@ public class MainPanel extends JPanel {
         this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
-        roadTable = new JTable(7, 5);
+        roadTable = new JTable(7, 1);
         roadTable.setEnabled(false);
-        roadTable.setRowHeight(42);
+        roadTable.setRowHeight(38);
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                if (column == 0) {
-                    JLabel label = new JLabel();
-                    label.setOpaque(true);
-                    label.setBackground(Color.BLACK);
-                    return label;
-                } else if (column == 4) {
-                    JLabel label = new JLabel();
-                    label.setOpaque(true);
-                    label.setBackground(Color.BLACK);
-                    return label;
-                } else if (column == carPosition+1 && row == 6) {
-                    JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                    car.setBackground(Color.orange);
-                    JLabel label = new JLabel();
-                    car.add(label);
-                    JPanel container = new JPanel(new BorderLayout());
-                    container.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 13));
-                    container.setBackground(table.getBackground());
-                    container.add(car, BorderLayout.CENTER);
-                    return container;
-                }
-                else if(gameBoard[6-row][column-1] == 1){
-                    JPanel container = new JPanel(new BorderLayout());
-                    JLabel label = new JLabel();
-                    label.setOpaque(true);
-                    label.setBackground(Color.BLACK);
-                    container.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
-                    container.setBackground(table.getBackground());
-                    container.add(label, BorderLayout.CENTER);
-                    return container;
-                }else {
-                    return new JLabel();
-                }
+//                if (column == 0) {
+//                    JLabel label = new JLabel();
+//                    label.setOpaque(true);
+//                    label.setBackground(Color.BLACK);
+//                    return label;
+//                } else if (column == 4) {
+//                    JLabel label = new JLabel();
+//                    label.setOpaque(true);
+//                    label.setBackground(Color.BLACK);
+//                    return label;
+//                } else if (column == carPosition+1 && row == 6) {
+//                    JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
+//                    car.setBackground(Color.orange);
+//                    JLabel label = new JLabel();
+//                    car.add(label);
+//                    JPanel container = new JPanel(new BorderLayout());
+//                    container.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 13));
+//                    container.setBackground(table.getBackground());
+//                    container.add(car, BorderLayout.CENTER);
+//                    return container;
+//                }
+//                else if(gameBoard[6-row][column-1] == 1){
+//                    JPanel container = new JPanel(new BorderLayout());
+//                    JLabel label = new JLabel();
+//                    label.setOpaque(true);
+//                    label.setBackground(Color.BLACK);
+//                    container.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
+//                    container.setBackground(table.getBackground());
+//                    container.add(label, BorderLayout.CENTER);
+//                    return container;
+//                }else {
+//                    return new JLabel();
+//                }
+                if(row==0){
+                    ImageIcon img = new ImageIcon("");
+                    JLabel jLabel = new JLabel();
+                    jLabel.setIcon(img);
+                    jLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+                    return jLabel;
+                }else return new JLabel();
             }
         });
-
-        roadPanel = new RoadPanel();
-        roadPanel.setLayout(null);
-
-        roadPanel.add(roadTable);
-        this.add(roadPanel, BorderLayout.CENTER);
 
         scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         unity = new SevenSegmentDigit();
@@ -81,7 +82,13 @@ public class MainPanel extends JPanel {
         scorePanel.add(hundreds);
         scorePanel.add(tens);
         scorePanel.add(unity);
-        this.add(scorePanel, BorderLayout.NORTH);
+
+        roadPanel = new RoadPanel();
+        roadPanel.setLayout(null);
+
+        roadPanel.add(scorePanel);
+        roadPanel.add(roadTable);
+        this.add(roadPanel, BorderLayout.CENTER);
     }
     public void updateView(){
         roadTable.repaint();
@@ -93,7 +100,7 @@ public class MainPanel extends JPanel {
             super.paintComponent(g);
             int panelWidth = getWidth();
             int panelHeight = getHeight();
-            int roadWidth = panelWidth - 340;
+            int roadWidth = 327;
             int roadHeight = panelHeight;
 
             g.setColor(Color.GREEN);
@@ -101,8 +108,10 @@ public class MainPanel extends JPanel {
 
             g.setColor(Color.RED);
             g.fillRect(150, 0, 20, panelHeight);
-            g.fillRect(panelWidth - 170, 0, 20, panelHeight);
+            g.fillRect(panelWidth - 90, 0, 20, panelHeight);
 
+            scorePanel.setBounds(0,0, 145, 70);
+            scorePanel.setBackground(Color.GREEN);
             roadTable.setBounds(170, 0, roadWidth, roadHeight);
         }
     }

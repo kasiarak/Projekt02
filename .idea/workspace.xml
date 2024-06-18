@@ -7,6 +7,7 @@
     <list default="true" id="8f6502ad-feea-4312-953a-d30fc2f22b6d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pres/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pres/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pres/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pres/MyFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/annar/IdeaProjects/p02"
+    "last_opened_file_path": "C:/Users/annar/IdeaProjects/lepszy autoslalom"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
