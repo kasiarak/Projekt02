@@ -12,12 +12,11 @@ public class SevenSegmentDigit extends JPanel implements DigitListener{
     public SevenSegmentDigit(){
         this.value = -1;
         this.setPreferredSize(new Dimension(42,60));
-        this.setBackground(Color.BLACK);
     }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         if(value == 0){
             g.fillRect(12,3,20,3);
             g.fillRect(6,8,3,20);

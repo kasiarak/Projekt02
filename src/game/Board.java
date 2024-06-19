@@ -41,25 +41,25 @@ public class Board implements KeyListener, TickEventListener {
                 keyListener = new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
-                        if(e.getKeyChar()=='a'){
-                            if(mainPanel.carPosition != 0){
-                                mainPanel.carPosition--;
-                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
-                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
-                                    else mainPanel.gameBoard[0][i] = 1;
-                                }
-                                mainPanel.updateView();
-                            }
-                        }else if(e.getKeyChar()=='d'){
-                            if(mainPanel.carPosition != 2){
-                                mainPanel.carPosition++;
-                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
-                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
-                                    else mainPanel.gameBoard[0][i] = 1;
-                                }
-                                mainPanel.updateView();
-                            }
-                        }
+//                        if(e.getKeyChar()=='a'){
+//                            if(mainPanel.carPosition != 0){
+//                                mainPanel.carPosition--;
+//                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
+//                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
+//                                    else mainPanel.gameBoard[0][i] = 1;
+//                                }
+//                                mainPanel.updateView();
+//                            }
+//                        }else if(e.getKeyChar()=='d'){
+//                            if(mainPanel.carPosition != 2){
+//                                mainPanel.carPosition++;
+//                                for(int i = 0; i < mainPanel.gameBoard[0].length; i++){
+//                                    if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = 0;
+//                                    else mainPanel.gameBoard[0][i] = 1;
+//                                }
+//                                mainPanel.updateView();
+//                            }
+//                        }
                     }
                 };
                 mainPanel.addKeyListener(keyListener);
@@ -77,54 +77,54 @@ public class Board implements KeyListener, TickEventListener {
 
     @Override
     public void handleTickEvent(TickEvent tickEvent) {
-       if((mainPanel.gameBoard[1][mainPanel.carPosition] & mainPanel.gameBoard[0][mainPanel.carPosition]) != 0){
-           mainPanel.unity.handleEvent(new ResetEvent(mainPanel.unity));
-           tickGenerator.interrupt();
-           mainPanel.removeKeyListener(keyListener);
-       }else{
-           if(mainPanel.gameBoard[1][0] == 1 || mainPanel.gameBoard[1][1] == 1 || mainPanel.gameBoard[1][2] == 1){
-               if(mainPanel.hundreds.value==9){
-                   mainPanel.unity.handleEvent(new ResetEvent(mainPanel.unity));
-                   mainPanel.removeKeyListener(keyListener);
-                   tickGenerator.interrupt();
-               }else{
-                   mainPanel.unity.handleEvent(new PlusOneEvent(mainPanel.unity));
-               }
-           }
-           for(int i = 0; i <= 2; i++){
-               if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = mainPanel.gameBoard[1][i];
-               mainPanel.gameBoard[1][i] = mainPanel.gameBoard[2][i];
-               mainPanel.gameBoard[2][i] = mainPanel.gameBoard[3][i];
-               mainPanel.gameBoard[3][i] = mainPanel.gameBoard[4][i];
-               mainPanel.gameBoard[4][i] = mainPanel.gameBoard[5][i];
-               mainPanel.gameBoard[5][i] = mainPanel.gameBoard[6][i];
-           }
-           if(freeRows==0){
-               int x = (int)(1+Math.random()*2);
-               for(int i = 0; i < x; i++){
-                   int index1 = (int)(Math.random()*3);
-                   if(i==0){
-                       mainPanel.gameBoard[6][index1] = 1;
-                   }else{
-                       int index2 = (int)(Math.random()*3);
-                       while (index2 == index1){
-                           index2 = (int)(Math.random()*3);
-                       }
-                       mainPanel.gameBoard[6][index2] = 1;
-                   }
-               }
-               freeRows = 0;
-               if(mainPanel.unity.value==0) freeRows++;
-               if(mainPanel.tens.value==0) freeRows++;
-               if(mainPanel.hundreds.value==0) freeRows++;
-               if(freeRows==0) freeRows++;
-           }else{
-               mainPanel.gameBoard[6][0] = 0;
-               mainPanel.gameBoard[6][1] = 0;
-               mainPanel.gameBoard[6][2] = 0;
-               freeRows--;
-           }
-           mainPanel.updateView();
-       }
+//       if((mainPanel.gameBoard[1][mainPanel.carPosition] & mainPanel.gameBoard[0][mainPanel.carPosition]) != 0){
+//           mainPanel.unity.handleEvent(new ResetEvent(mainPanel.unity));
+//           tickGenerator.interrupt();
+//           mainPanel.removeKeyListener(keyListener);
+//       }else{
+//           if(mainPanel.gameBoard[1][0] == 1 || mainPanel.gameBoard[1][1] == 1 || mainPanel.gameBoard[1][2] == 1){
+//               if(mainPanel.hundreds.value==9){
+//                   mainPanel.unity.handleEvent(new ResetEvent(mainPanel.unity));
+//                   mainPanel.removeKeyListener(keyListener);
+//                   tickGenerator.interrupt();
+//               }else{
+//                   mainPanel.unity.handleEvent(new PlusOneEvent(mainPanel.unity));
+//               }
+//           }
+//           for(int i = 0; i <= 2; i++){
+//               if(i!=mainPanel.carPosition) mainPanel.gameBoard[0][i] = mainPanel.gameBoard[1][i];
+//               mainPanel.gameBoard[1][i] = mainPanel.gameBoard[2][i];
+//               mainPanel.gameBoard[2][i] = mainPanel.gameBoard[3][i];
+//               mainPanel.gameBoard[3][i] = mainPanel.gameBoard[4][i];
+//               mainPanel.gameBoard[4][i] = mainPanel.gameBoard[5][i];
+//               mainPanel.gameBoard[5][i] = mainPanel.gameBoard[6][i];
+//           }
+//           if(freeRows==0){
+//               int x = (int)(1+Math.random()*2);
+//               for(int i = 0; i < x; i++){
+//                   int index1 = (int)(Math.random()*3);
+//                   if(i==0){
+//                       mainPanel.gameBoard[6][index1] = 1;
+//                   }else{
+//                       int index2 = (int)(Math.random()*3);
+//                       while (index2 == index1){
+//                           index2 = (int)(Math.random()*3);
+//                       }
+//                       mainPanel.gameBoard[6][index2] = 1;
+//                   }
+//               }
+//               freeRows = 0;
+//               if(mainPanel.unity.value==0) freeRows++;
+//               if(mainPanel.tens.value==0) freeRows++;
+//               if(mainPanel.hundreds.value==0) freeRows++;
+//               if(freeRows==0) freeRows++;
+//           }else{
+//               mainPanel.gameBoard[6][0] = 0;
+//               mainPanel.gameBoard[6][1] = 0;
+//               mainPanel.gameBoard[6][2] = 0;
+//               freeRows--;
+//           }
+//           mainPanel.updateView();
+//       }
     }
 }
