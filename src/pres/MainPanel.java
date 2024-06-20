@@ -23,45 +23,12 @@ public class MainPanel extends JPanel {
         this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
-        roadTable = new RoadTable(7,1);
+        roadTable = new JTable(7,1);
         roadTable.setEnabled(false);
         roadTable.setRowHeight(38);
         roadTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-//                if (column == 0) {
-//                    JLabel label = new JLabel();
-//                    label.setOpaque(true);
-//                    label.setBackground(Color.BLACK);
-//                    return label;
-//                } else if (column == 4) {
-//                    JLabel label = new JLabel();
-//                    label.setOpaque(true);
-//                    label.setBackground(Color.BLACK);
-//                    return label;
-//                } else if (column == carPosition+1 && row == 6) {
-//                    JPanel car = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//                    car.setBackground(Color.orange);
-//                    JLabel label = new JLabel();
-//                    car.add(label);
-//                    JPanel container = new JPanel(new BorderLayout());
-//                    container.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 13));
-//                    container.setBackground(table.getBackground());
-//                    container.add(car, BorderLayout.CENTER);
-//                    return container;
-//                }
-//                else if(gameBoard[6-row][column-1] == 1){
-//                    JPanel container = new JPanel(new BorderLayout());
-//                    JLabel label = new JLabel();
-//                    label.setOpaque(true);
-//                    label.setBackground(Color.BLACK);
-//                    container.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
-//                    container.setBackground(table.getBackground());
-//                    container.add(label, BorderLayout.CENTER);
-//                    return container;
-//                }else {
-//                    return new JLabel();
-//                }
                 if(row==6){
                     ImageIcon img = null;
                     JLabel jLabel = new JLabel();
@@ -156,45 +123,36 @@ public class MainPanel extends JPanel {
         scorePanel.add(tens);
         scorePanel.add(unity);
 
-        roadPanel = new RoadPanel();
-        roadPanel.setLayout(null);
+        roadPanel = new RoadPanel(scorePanel,roadTable);
 
-        roadPanel.add(scorePanel);
-        roadPanel.add(roadTable);
         this.add(roadPanel, BorderLayout.CENTER);
     }
-    public void updateView(){
-        roadTable.repaint();
+    public void updateView(int row){
+        roadTable.repaint(roadTable.getCellRect(row,0,false));
     }
+
 
     class RoadPanel extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            int panelWidth = getWidth();
-            int panelHeight = getHeight();
-            int roadWidth = 406;
-            int roadHeight = panelHeight;
+        private JPanel scorePanel;
+        private JTable roadTable;
 
-            g.setColor(Color.GREEN);
-           // g.fillRect(0, 0, panelWidth, panelHeight);
-
-            g.setColor(Color.RED);
-          //  g.fillRect(150, 0, 20, panelHeight);
-           // g.fillRect(panelWidth - 120, 0, 20, panelHeight);
-
-            scorePanel.setBounds(0,0, 145, 70);
-            roadTable.setBounds(170, 0, roadWidth, roadHeight);
-        }
-    }
-    class RoadTable extends JTable{
-        public RoadTable(int numRows, int numColumns) {
-            super(numRows, numColumns);
+        public RoadPanel(JPanel scorePanel, JTable roadTable) {
+            this.scorePanel = scorePanel;
+            this.roadTable = roadTable;
+            setLayout(null);
+            add(scorePanel);
+            add(roadTable);
         }
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(Color.RED);
+            scorePanel.setBounds(0, 0, 145, 70);
+            scorePanel.setOpaque(false);
+            roadTable.setBounds(0, 0, 600, getHeight());
+            g2d.drawLine(0, 290, 50, 50);
         }
     }
 }

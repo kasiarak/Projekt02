@@ -22,13 +22,11 @@ public class TickGenerator extends Thread{
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                while(isWorking){
-                    notifyTickEvent();
-                    Thread.sleep(interval);
-                    count++;
-                    if(count%5 == 0 && interval != 200){
-                        interval-=50;
-                    }
+                notifyTickEvent();
+                Thread.sleep(interval);
+                count++;
+                if(count%5 == 0 && interval != 200){
+                    interval-=50;
                 }
             }
         } catch (InterruptedException e) {

@@ -12,6 +12,7 @@ public class SevenSegmentDigit extends JPanel implements DigitListener{
     public SevenSegmentDigit(){
         this.value = -1;
         this.setPreferredSize(new Dimension(42,60));
+        this.setOpaque(false);
     }
     @Override
     protected void paintComponent(Graphics g) {
