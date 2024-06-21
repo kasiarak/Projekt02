@@ -23,6 +23,7 @@ public class MainPanel extends JPanel {
         this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
+        scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         roadTable = new RoadTable(7,1);
         roadTable.setEnabled(false);
         roadTable.setRowHeight(38);
@@ -115,7 +116,7 @@ public class MainPanel extends JPanel {
             }
         });
 
-        scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
         unity = new SevenSegmentDigit();
         tens = new SevenSegmentDigit();
         hundreds = new SevenSegmentDigit();
@@ -139,15 +140,13 @@ public class MainPanel extends JPanel {
         roadTable.repaint();
     }
     class RoadPanel extends JPanel {
-         RoadTable roadTable;
-
+        RoadTable roadTable;
         public RoadPanel(RoadTable roadTable) {
             this.roadTable = roadTable;
             setLayout(null);
             add(scorePanel);
             add(roadTable);
         }
-
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -157,7 +156,7 @@ public class MainPanel extends JPanel {
     class RoadTable extends JTable{
         public RoadTable(int numRows, int numColumns) {
             super(numRows, numColumns);
-            //add(scorePanel);
+            add(scorePanel);
         }
         @Override
         protected void paintComponent(Graphics g) {
@@ -166,7 +165,7 @@ public class MainPanel extends JPanel {
             g2d.setColor(new Color(165,57,48));
             g2d.setStroke(new BasicStroke(2));
             g2d.drawLine(135, 300, 329, 0);
-            g2d.drawLine(100, 300, 308, 0);
+            g2d.drawLine(100, 300, 310, 0);
             g2d.setStroke(new BasicStroke(3));
             g2d.drawLine(422,300, 510,0);
             g2d.setColor(new Color(16,171,125));
@@ -176,7 +175,7 @@ public class MainPanel extends JPanel {
             int[] xPoints2 = {245,0,-55};
             int[] yPoints2 = {75,75,500};
             g2d.fillPolygon(xPoints2, yPoints2,3);
-            scorePanel.setBounds(0, 0, 145, 35);
+            scorePanel.setBounds(0, 0, 145, 70);
             scorePanel.setOpaque(false);
         }
     }
