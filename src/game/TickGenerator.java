@@ -3,12 +3,17 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import static game.Board.isWorking;
-
 public class TickGenerator extends Thread{
+    static TickGenerator instance = null;
     int interval = 1000;
     int count = 0;
     List<TickEventListener> listeners = new ArrayList<>();
+    public static synchronized TickGenerator getInstance() {
+        if (instance == null) {
+            instance = new TickGenerator();
+        }
+        return instance;
+    }
     public void addTickEventListener(TickEventListener listener) {
         listeners.add(listener);
     }

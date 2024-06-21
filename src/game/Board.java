@@ -13,7 +13,6 @@ import pres.StartEvent;
 public class Board implements KeyListener, TickEventListener {
     private final MainPanel mainPanel;
     KeyListener keyListener;
-    static boolean isWorking = false;
     TickGenerator tickGenerator;
     int freeRows = 0;
 
@@ -27,12 +26,11 @@ public class Board implements KeyListener, TickEventListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 's') {
+        if (e.getKeyChar() == 's' && !TickGenerator.getInstance().isAlive()) {
             mainPanel.unity.handleEvent(new StartEvent(mainPanel.unity));
-            tickGenerator = new TickGenerator();
+            tickGenerator = TickGenerator.getInstance();
             tickGenerator.addTickEventListener(this);
             tickGenerator.start();
-            isWorking = true;
             keyListener = new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
