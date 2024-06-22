@@ -52,8 +52,8 @@ public class Board implements KeyListener, TickEventListener {
                         }
                     }
                 }
-                };
-                mainPanel.addKeyListener(keyListener);
+            };
+            mainPanel.addKeyListener(keyListener);
         }
     }
 
@@ -64,6 +64,7 @@ public class Board implements KeyListener, TickEventListener {
 
     @Override
     public void handleTickEvent(TickEvent tickEvent) {
+        boolean[] arr = new boolean[7];
         if((mainPanel.gameBoard[0] & mainPanel.gameBoard[1]) != 0){
             mainPanel.unity.handleEvent(new ResetEvent(mainPanel.unity));
             tickGenerator.interrupt();
@@ -81,29 +82,27 @@ public class Board implements KeyListener, TickEventListener {
 
             if(mainPanel.gameBoard[2] != mainPanel.gameBoard[1]){
                 mainPanel.gameBoard[1] = mainPanel.gameBoard[2];
-                mainPanel.updateView(5);
+               arr[0] = true;
             }
             if(mainPanel.gameBoard[3] != mainPanel.gameBoard[2]){
                 mainPanel.gameBoard[2] = mainPanel.gameBoard[3];
-                mainPanel.updateView(4);
+                arr[1] = true;
             }
             if(mainPanel.gameBoard[4] != mainPanel.gameBoard[3]){
                 mainPanel.gameBoard[3] = mainPanel.gameBoard[4];
-                mainPanel.updateView(3);
+                arr[2] = true;
             }
             if(mainPanel.gameBoard[5] != mainPanel.gameBoard[4]){
                 mainPanel.gameBoard[4] = mainPanel.gameBoard[5];
-                mainPanel.updateView(2);
+                arr[3] = true;
             }
             if(mainPanel.gameBoard[6] != mainPanel.gameBoard[5]){
                 mainPanel.gameBoard[5] = mainPanel.gameBoard[6];
-                mainPanel.updateView(1);
+                arr[4] = true;
             }
-            mainPanel.update();
             if(freeRows==0){
                 int row = (int)(1+Math.random()*6);
                 mainPanel.gameBoard[6] = row;
-                mainPanel.updateView(0);
                 if(mainPanel.unity.value==0) freeRows++;
                 if(mainPanel.tens.value==0) freeRows++;
                 if(mainPanel.hundreds.value==0) freeRows++;
@@ -115,6 +114,7 @@ public class Board implements KeyListener, TickEventListener {
                 }
                 freeRows--;
             }
+            mainPanel.update(arr);
         }
     }
 }

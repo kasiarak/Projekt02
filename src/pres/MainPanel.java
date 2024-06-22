@@ -136,8 +136,14 @@ public class MainPanel extends JPanel {
         tens.repaint();
         hundreds.repaint();
     }
-    public void update(){
-        roadTable.repaint();
+    public void update(boolean[] arr){
+        updateView(6);
+        if(arr[0]) updateView(5);
+        if(arr[1]) updateView(4);
+        if(arr[2]) updateView(3);
+        if(arr[3]) updateView(2);
+        if(arr[4]) updateView(1);
+        updateView(0);
     }
     class RoadPanel extends JPanel {
         RoadTable roadTable;
